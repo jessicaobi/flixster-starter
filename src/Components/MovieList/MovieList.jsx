@@ -17,7 +17,7 @@ const MovieList = () => {
     const fetchList = async () => {
       try {
         const { data } = await axios.get(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`
+          `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}`
         );
         setMovie(data.results);
         console.log(data.results);
@@ -27,6 +27,10 @@ const MovieList = () => {
     };
     fetchList();
   }, []);
+
+
+
+
 
   //2 when card clicked, fetch details & open modal
   const handleCardClick = async (name) => {
@@ -48,17 +52,29 @@ const MovieList = () => {
     setSelectedMovie(null);
   };
 
+  
+  const [visible, setVisible] = useState(5);
+
+
+
+  const showMoreItems = () => {
+    setVisible((prevValue) => prevValue + 3);
+  };
+
+
   return (
     <>
       <div className="movie-list">
-        {movies.map((movie, index) => (
+        {movies.slice(0,visible).map((movie, index) => (
           //i need to call the MovieCard component
           <MovieCard
             key={index} //using name as a key
             movie={movie} //using name as the value for the name of the movie
             onClick={() => handleCardClick(movie.id)}
-          />
+                    />
         ))}
+        <button onClick = {showMoreItems}>Load More</button>
+
       </div>
 
       <MovieModal

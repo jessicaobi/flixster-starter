@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieCard from "../MovieCard/MovieCard";
 import MovieModal from "../MovieModal/MovieModal";
-
 import "./MovieList.css";
+import { FaSearch } from "react-icons/fa";
+
 
 const MovieList = () => {
   const [movies, setMovie] = useState([]);
@@ -11,13 +12,16 @@ const MovieList = () => {
   const [showModal, setShowModal] = useState(false);
   const api_key = import.meta.env.VITE_API_KEY;
 
+//   if(!show) {
+//     return null;
+//   }
   //use API key in .env file
   // 1 fetch list on mount
   useEffect(() => {
     const fetchList = async () => {
       try {
         const { data } = await axios.get(
-          `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}`
+          `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`
         );
         setMovie(data.results);
         console.log(data.results);
@@ -58,40 +62,116 @@ const MovieList = () => {
     setVisible((prevValue) => prevValue + 3);
   };
 
-//Search
-/*
-const getFilteredItems = (query, items) => {
-    if (!query) {
-        return items;
+  const [results, setResults] = useState([]);
+
+    const [input, setInput] = useState("");
+    const [search, setSearch] = useState("");
+
+    const handleSubmit = (e) => {
+        console.log(input);
+        e.preventDefault();
+        setSearch(input);
+        fetchData(input);
+    
+
     }
-    return items.filter(movie => movie.title.includes(query))
-}
-const {movieSearch} = `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}`;
-const {items} = title;
-const filteredItems = getFilteredItems(query, items);
-*/
+    const fetchData = (value) => {
+        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`)
+        .then((response) => response.json())
+        .then((json) => {
+            const results = (json.results || []).filter((user) => {
+                return (
+                   value &&  user && user.title && user.title.toLowerCase().includes(value)
+                );
+            });
+
+setResults(results);
+      });
+    }
+    const handleChange = (value) =>{
+        setInput(value);
+    };
+
+function sortFunction (typeOfSort, info){
+    if (typeOfSort === "alphabethic") {
+
+    }
+    else if (typeOfSort === "releaseDate"){
+
+    }
+    else if (typeOfSort === "voteAverage"){
+
+    }
+
+};
+
+
+
+
   return (
     <>
-      <div className="movie-list">
-        <button>Now Playing</button>
-        <label>Search</label>
-        
-        <input type="text" onChange = {e => setQuery(e.target.value)}/>
-        {/*
-        <ul>
-            {filteredItems.map(movie, index)}
-        </ul>
-        */}
-        {movies.slice(0, visible).map((movie, index) => (
-          //i need to call the MovieCard component
-          <MovieCard
-            key={index} //using name as a key
-            movie={movie} //using name as the value for the name of the movie
-            onClick={() => handleCardClick(movie.id)}
-          />
-        ))}
-        <button onClick={showMoreItems}>Load More</button>
+      <div className="search-bar-container">
+        <div className="input-wrapper">
+          <form onSubmit={handleSubmit}>
+            <FaSearch id="search-icon" />
+            <input
+              type="text"
+              placeholder="Search"
+              value={input}
+              onChange={(e) => handleChange(e.target.value)}
+            />
+            <button className="submit-button">Search</button>
+          </form>
+
+          <button
+            className="submit-button"
+            type="button"
+            onClick={() => {
+              setInput("");
+              setSearch("");
+              setResults([]);
+            }}
+          >
+            Clear
+          </button>
+        </div>
       </div>
+      {/* <div className="dropDown">
+        <select>
+            <option value ="regular"> Regular</option>
+          {/* <option value="alphabetic" onClick {...sortFunction(value)}>Alphabetic A-Z</option> 
+
+          <option value="releaseDate">Recent to Oldest</option>
+
+          <option value="voteAverage">Vote Average</option>
+        </select>
+      </div> */}
+
+      
+      {results.length > 0 ? (
+        <div className="results-list">
+          {results.map((movie, index) => (
+            <MovieCard
+              key={movie.id || index}
+              movie={movie}
+              onClick={() => handleCardClick(movie.id)}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="movie-list">
+          {movies.slice(0, visible).map((movie, index) => (
+            <MovieCard
+              key={movie.id || index}
+              movie={movie}
+              onClick={() => handleCardClick(movie.id)}
+            />
+          ))}
+          <div className="loadMoreButton">
+            <button onClick={showMoreItems}>Load More</button>
+          </div>
+        </div>
+      )}
 
       <MovieModal
         show={showModal}

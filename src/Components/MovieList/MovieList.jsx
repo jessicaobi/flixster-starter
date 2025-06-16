@@ -52,29 +52,45 @@ const MovieList = () => {
     setSelectedMovie(null);
   };
 
-  
+  //For load more
   const [visible, setVisible] = useState(5);
-
-
-
   const showMoreItems = () => {
     setVisible((prevValue) => prevValue + 3);
   };
 
-
+//Search
+/*
+const getFilteredItems = (query, items) => {
+    if (!query) {
+        return items;
+    }
+    return items.filter(movie => movie.title.includes(query))
+}
+const {movieSearch} = `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}`;
+const {items} = title;
+const filteredItems = getFilteredItems(query, items);
+*/
   return (
     <>
       <div className="movie-list">
-        {movies.slice(0,visible).map((movie, index) => (
+        <button>Now Playing</button>
+        <label>Search</label>
+        
+        <input type="text" onChange = {e => setQuery(e.target.value)}/>
+        {/*
+        <ul>
+            {filteredItems.map(movie, index)}
+        </ul>
+        */}
+        {movies.slice(0, visible).map((movie, index) => (
           //i need to call the MovieCard component
           <MovieCard
             key={index} //using name as a key
             movie={movie} //using name as the value for the name of the movie
             onClick={() => handleCardClick(movie.id)}
-                    />
+          />
         ))}
-        <button onClick = {showMoreItems}>Load More</button>
-
+        <button onClick={showMoreItems}>Load More</button>
       </div>
 
       <MovieModal

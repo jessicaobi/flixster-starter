@@ -54,8 +54,8 @@ const MovieList = () => {
         {movies.map((movie, index) => (
           //i need to call the MovieCard component
           <MovieCard
-            key= {index} //using name as a key
-            movie ={movie} //using name as the value for the name of the movie
+            key={index} //using name as a key
+            movie={movie} //using name as the value for the name of the movie
             onClick={() => handleCardClick(movie.id)}
           />
         ))}

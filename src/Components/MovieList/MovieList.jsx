@@ -37,7 +37,7 @@ const MovieList = () => {
 
 
   //2 when card clicked, fetch details & open modal
-  const handleCardClick = async (name) => {
+  const handleCardClick = async (id) => {
     setShowModal(true);
     setSelectedMovie(null); //trigger the loading state
     try {
@@ -90,23 +90,7 @@ setResults(results);
     }
     const handleChange = (value) =>{
         setInput(value);
-    };
-
-function sortFunction (typeOfSort, info){
-    if (typeOfSort === "alphabethic") {
-
     }
-    else if (typeOfSort === "releaseDate"){
-
-    }
-    else if (typeOfSort === "voteAverage"){
-
-    }
-
-};
-
-
-
 
   return (
     <>
@@ -136,18 +120,7 @@ function sortFunction (typeOfSort, info){
           </button>
         </div>
       </div>
-      {/* <div className="dropDown">
-        <select>
-            <option value ="regular"> Regular</option>
-          {/* <option value="alphabetic" onClick {...sortFunction(value)}>Alphabetic A-Z</option> 
-
-          <option value="releaseDate">Recent to Oldest</option>
-
-          <option value="voteAverage">Vote Average</option>
-        </select>
-      </div> */}
-
-      
+            
       {results.length > 0 ? (
         <div className="results-list">
           {results.map((movie, index) => (
@@ -167,7 +140,7 @@ function sortFunction (typeOfSort, info){
               onClick={() => handleCardClick(movie.id)}
             />
           ))}
-          <div className="loadMoreButton">
+          <div className = "loadMoreButton">
             <button onClick={showMoreItems}>Load More</button>
           </div>
         </div>

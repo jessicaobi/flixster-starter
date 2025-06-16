@@ -1,8 +1,9 @@
 import React from "react";
-import.meta.env.VITE_API_KEY;
 import "./MovieModal.css";
 
 const MovieModal = ({ show, onClose, movie }) => {
+    const api_key = import.meta.env.VITE_API_KEY;
+
   if (!show) return null;
 
   return (
@@ -17,20 +18,13 @@ const MovieModal = ({ show, onClose, movie }) => {
           ) : (
             <div className="details">
               <h2>
-                {movie.id} {movie.title.toUpperCase()}
+                {movie.title}
               </h2>
-              <p>
-                {/*
-                <strong>Types:</strong>{" "}
-                {movie.types.map((t) => t.type.name).join(", ")}
-              </p>
-              <p>
-                <strong>Height:</strong> {pokemon.height / 10} m
-              </p>
-              <p>
-                <strong>Weight:</strong> {pokemon.weight / 10} kg
-                */}
-              </p>
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={`${movie.title} poster`}
+              />{" "}
+   
             </div>
           )}
         </div>

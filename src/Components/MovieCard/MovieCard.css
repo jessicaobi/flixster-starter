@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #ffffff;
-    border: solid  12px;
-    outline: dashed white 10px;
+    background: #ecdbc1;
+    border: solid #a98856  12px;
+    outline: dashed #a98856 10px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 0px 10px 0px 10px;
@@ -13,11 +13,6 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   }
-  /*
-  @keyframes mymove {
-    50% {box-shadow: 10px 20px 30px blue;}
-  }
-    */
   
   .movie-item:hover {
     transform: translateY(-4px);

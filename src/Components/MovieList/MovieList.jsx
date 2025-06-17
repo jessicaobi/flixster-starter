@@ -98,8 +98,55 @@ const MovieList = () => {
         setInput(value);
     }
 
+
+
+
+    const [filterChoice, setFilterChoice] = useState(null);
+
+    const handleDropDown = (e) => {
+      setFilterChoice(e.target.value);
+    };
+
+
+
+  useEffect(() => {
+    if (!filterChoice) return;
+
+    const fetchFilteredMovie = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://api.themoviedb.org/3/discover/movie`,
+{
+  params:{
+  api_key: api_key,
+  sort_by: filterChoice,
+
+},
+      }
+        ); 
+           setMovie(data.results);
+
+      } catch (err) {
+        console.error("Error fetching sorted list: ", err);
+      }
+    };
+    fetchFilteredMovie();
+  }, [filterChoice]);
+
+
+
+
+
+
   return (
     <>
+      <div className="dropDown">
+        <select value = {filterChoice} onChange={handleDropDown}>
+          <option value = "original_title.asc">Alphabetic, A-Z</option>
+          <option value = "primary_release_date.desc">Release Date</option>
+          <option value = "vote_average.desc">Vote Average</option>
+        </select>
+      </div>
       <div className="search-bar-container">
         <div className="input-wrapper">
           <form onSubmit={handleSubmit}>
@@ -126,7 +173,7 @@ const MovieList = () => {
           </button>
         </div>
       </div>
-            
+
       {results.length > 0 ? (
         <div className="results-list">
           {results.map((movie, index) => (
@@ -146,7 +193,7 @@ const MovieList = () => {
               onClick={() => handleCardClick(movie.id)}
             />
           ))}
-          <div className = "loadMoreButton">
+          <div className="loadMoreButton">
             <button onClick={showMoreItems}>Load More</button>
           </div>
         </div>

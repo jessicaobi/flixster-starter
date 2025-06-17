@@ -11,6 +11,8 @@ const MovieList = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const api_key = import.meta.env.VITE_API_KEY;
+  const search_url = import.meta.env.VITE_SEARCH_URL;
+  const [pages, setPages] = useState(1);
 
 //   if(!show) {
 //     return null;
@@ -21,16 +23,16 @@ const MovieList = () => {
     const fetchList = async () => {
       try {
         const { data } = await axios.get(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`
+          `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&page=${pages}`
         );
-        setMovie(data.results);
-        console.log(data.results);
+        setMovie(prev => pages === 1 ? data.results : [...prev, ...data.results]);
+
       } catch (err) {
         console.error("Error fetching list: ", err);
       }
     };
     fetchList();
-  }, []);
+  }, [pages]);
 
 
 
@@ -57,9 +59,8 @@ const MovieList = () => {
   };
 
   //For load more
-  const [visible, setVisible] = useState(5);
   const showMoreItems = () => {
-    setVisible((prevValue) => prevValue + 3);
+    setPages(prev => prev + 1);
   };
 
   const [results, setResults] = useState([]);
@@ -76,17 +77,22 @@ const MovieList = () => {
 
     }
     const fetchData = (value) => {
-        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`)
-        .then((response) => response.json())
-        .then((json) => {
+        fetch(
+          `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${value}`
+        )
+          .then((response) => response.json())
+          .then((json) => {
             const results = (json.results || []).filter((user) => {
-                return (
-                   value &&  user && user.title && user.title.toLowerCase().includes(value)
-                );
+              return (
+                value &&
+                user &&
+                user.title &&
+                user.title.toLowerCase().includes(value)
+              );
             });
 
-setResults(results);
-      });
+            setResults(results);
+          });
     }
     const handleChange = (value) =>{
         setInput(value);
@@ -133,7 +139,7 @@ setResults(results);
         </div>
       ) : (
         <div className="movie-list">
-          {movies.slice(0, visible).map((movie, index) => (
+          {movies.map((movie, index) => (
             <MovieCard
               key={movie.id || index}
               movie={movie}

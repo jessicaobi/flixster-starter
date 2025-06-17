@@ -1,8 +1,9 @@
 .App {
   text-align: center;
-  background: #9e9e9e;
-  background: radial-gradient(circle, rgba(158, 158, 158, 1) 25%, rgba(0, 0, 0, 1) 81%);  height: 100vh;
-  padding-top: 2em;
+
+  transform: translateY(40px);
+  animation: fadeInUp 1s forwards;
+
 }
 
 .App-header {
@@ -64,6 +65,13 @@
       opacity: 0;
       transform: translateY(-40px);
   }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
   to {
       opacity: 1;
       transform: translateY(0);

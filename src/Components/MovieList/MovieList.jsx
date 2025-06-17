@@ -141,17 +141,9 @@ const MovieList = () => {
   return (
     <>
       <nav>
-        <div className="dropDown">
-          <select value={filterChoice} onChange={handleDropDown}>
-            <option value="original_title.asc">Alphabetic, A-Z</option>
-            <option value="primary_release_date.desc">Release Date</option>
-            <option value="vote_average.desc">Vote Average</option>
-          </select>
-        </div>
         <div className="search-bar-container">
           <div className="input-wrapper">
             <form onSubmit={handleSubmit}>
-              <FaSearch id="search-icon" />
               <input
                 type="text"
                 placeholder="Search"
@@ -172,6 +164,14 @@ const MovieList = () => {
             >
               Clear
             </button>
+          </div>
+
+          <div className="dropDown">
+            <select value={filterChoice} onChange={handleDropDown}>
+              <option value="original_title.asc">Alphabetic, A-Z</option>
+              <option value="primary_release_date.desc">Release Date</option>
+              <option value="vote_average.desc">Vote Average</option>
+            </select>
           </div>
         </div>
       </nav>

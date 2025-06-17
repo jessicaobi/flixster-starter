@@ -4,7 +4,6 @@
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 1rem;
     padding: 1rem;
-    background-color: darkred;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -64,7 +63,6 @@ input:focus{
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 1rem;
     padding: 1rem;
-    background-color: darkgreen;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -72,3 +70,4 @@ input:focus{
 .loadMoreButton{
     display: flex;
 }
+

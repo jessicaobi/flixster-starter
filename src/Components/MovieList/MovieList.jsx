@@ -140,40 +140,41 @@ const MovieList = () => {
 
   return (
     <>
-      <div className="dropDown">
-        <select value = {filterChoice} onChange={handleDropDown}>
-          <option value = "original_title.asc">Alphabetic, A-Z</option>
-          <option value = "primary_release_date.desc">Release Date</option>
-          <option value = "vote_average.desc">Vote Average</option>
-        </select>
-      </div>
-      <div className="search-bar-container">
-        <div className="input-wrapper">
-          <form onSubmit={handleSubmit}>
-            <FaSearch id="search-icon" />
-            <input
-              type="text"
-              placeholder="Search"
-              value={input}
-              onChange={(e) => handleChange(e.target.value)}
-            />
-            <button className="submit-button">Search</button>
-          </form>
-
-          <button
-            className="submit-button"
-            type="button"
-            onClick={() => {
-              setInput("");
-              setSearch("");
-              setResults([]);
-            }}
-          >
-            Clear
-          </button>
+      <nav>
+        <div className="dropDown">
+          <select value={filterChoice} onChange={handleDropDown}>
+            <option value="original_title.asc">Alphabetic, A-Z</option>
+            <option value="primary_release_date.desc">Release Date</option>
+            <option value="vote_average.desc">Vote Average</option>
+          </select>
         </div>
-      </div>
+        <div className="search-bar-container">
+          <div className="input-wrapper">
+            <form onSubmit={handleSubmit}>
+              <FaSearch id="search-icon" />
+              <input
+                type="text"
+                placeholder="Search"
+                value={input}
+                onChange={(e) => handleChange(e.target.value)}
+              />
+              <button className="submit-button">Search</button>
+            </form>
 
+            <button
+              className="submit-button"
+              type="button"
+              onClick={() => {
+                setInput("");
+                setSearch("");
+                setResults([]);
+              }}
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+      </nav>
       {results.length > 0 ? (
         <div className="results-list">
           {results.map((movie, index) => (

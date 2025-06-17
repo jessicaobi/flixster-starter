@@ -1,7 +1,8 @@
 .App {
   text-align: center;
-  background-color: darkred;
-  height: 100vh;
+  background: #9e9e9e;
+  background: radial-gradient(circle, rgba(158, 158, 158, 1) 25%, rgba(0, 0, 0, 1) 81%);  height: 100vh;
+  padding-top: 2em;
 }
 
 .App-header {
@@ -26,5 +27,45 @@
 
   .search-bar form {
     flex-direction: column;
+  }
+}
+
+.header {
+  background-image: url('https://media.tenor.com/_nicmdVprBoAAAAM/film-filmstrip.gif');
+  max-height: fit-content;
+  /* Remove max-height: fit-content; */
+  background-size: contain;
+  background-position: center; /* or try 'top' for top-aligned */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInDown 1s forwards;
+}
+
+
+
+#flixsterTitle {
+  color: white;
+  font-family: "Limelight", sans-serif;
+  text-shadow:2px 2px 20px rgb(0, 0, 0);
+  font-size: 60px;
+  text-align: center;
+  padding: 20px;
+}
+
+
+@keyframes fadeInDown {
+  from {
+      opacity: 0;
+      transform: translateY(-40px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
   }
 }

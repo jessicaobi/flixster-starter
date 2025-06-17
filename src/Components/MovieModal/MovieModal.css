@@ -30,7 +30,7 @@
     position: relative;
     padding: 1.5rem;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    animation: slideDown 0.3s ease-out;
+    animation: slideDown 0.8s ease-out;
   }
   
   @keyframes slideDown {

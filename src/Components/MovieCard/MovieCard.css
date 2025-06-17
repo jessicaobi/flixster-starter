@@ -3,17 +3,30 @@
     flex-direction: column;
     align-items: center;
     background: #ffffff;
+    border: solid black 12px;
+    outline: dashed white 10px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
+    padding: 0px 10px 0px 10px;
+    margin: 10px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+
   }
+  /*
+  @keyframes mymove {
+    50% {box-shadow: 10px 20px 30px blue;}
+  }
+    */
   
   .movie-item:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  }
+    box-shadow: 10px 20px 30px red; 
+    border: solid black 12px;
+    outline: dashed gold 10px;
+
+
+}
   
   .movie-item img {
     width: 100px;

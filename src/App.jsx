@@ -5,7 +5,11 @@ import MovieList from "./Components/MovieList/MovieList";
 const App = () => {
   return (
     <>
-      <div className="App">  
+      <header className="header">
+        <h1 id="flixsterTitle">FLIXSTER</h1>
+      </header>
+
+      <div className="App">
         <MovieList />
       </div>
     </>

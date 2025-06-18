@@ -168,6 +168,7 @@ const MovieList = () => {
 
           <div className="dropDown">
             <select value={filterChoice} onChange={handleDropDown}>
+              <option value="popularity.desc">Default</option>
               <option value="original_title.asc">Alphabetic, A-Z</option>
               <option value="primary_release_date.desc">Release Date</option>
               <option value="vote_average.desc">Vote Average</option>

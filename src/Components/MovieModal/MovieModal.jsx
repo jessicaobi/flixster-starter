@@ -27,6 +27,7 @@ const MovieModal = ({ show, onClose, movie }) => {
             <p>Release Date: {movie.release_date}</p>
             <p>Overview: {movie.overview}</p>
             <p>Genres: {movie.genre_ids}</p>
+            <p>Runtime: {movie.runtime} minutes</p>
             </div>
           )}
         </div>

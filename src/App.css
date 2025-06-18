@@ -3,6 +3,7 @@
 
   transform: translateY(40px);
   animation: fadeInUp 1s forwards;
+  position: relative;
 
 }
 

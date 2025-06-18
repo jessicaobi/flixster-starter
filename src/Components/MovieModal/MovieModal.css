@@ -1,6 +1,8 @@
 /* Overlay background */
 .modal {
-  position: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
   inset: 0; /* shorthand for top/right/bottom/left = 0 */
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
@@ -8,6 +10,8 @@
   justify-content: center;
   z-index: 1000;
   animation: fadeIn 0.2s ease-out;
+  height: 100%;
+  width: 100%;
 }
 
 @keyframes fadeIn {

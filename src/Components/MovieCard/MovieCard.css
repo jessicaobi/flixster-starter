@@ -43,4 +43,14 @@
     color: #333333;
     transition: color 0.2s ease;
   }
+
+  #likeButton.active {
+    background-color: red;
+    color: #fff;
+  }
+  
+  #watchButton.active {
+    background-color: lightskyblue;
+    color: #fff;
+  }
   
